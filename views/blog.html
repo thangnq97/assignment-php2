@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- container -->
+    <div class="max-w-[1440px] mx-auto">
+        <!-- header -->
+        <header class="px-7 py-5 flex justify-between items-center">
+            <a href="#">
+                <img src="./img/logo.png" alt="">
+            </a>
+            <div class="flex gap-6">
+                <nav>
+                    <ul class="flex gap-8">
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./home.html">Home</a></li>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./pages.html">Pages</a></li>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./shop.html">Shop</a></li>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="#">Blog</a></li>
+                    </ul>
+                </nav>
+                <a href="./cart.html" class="cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+        </header>
+        <!-- banner -->
+        <section class="py-10 text-center flex flex-col gap-5 bg-[#335154]">
+            <h2 class="text-[#df453e] font-[800] text-[42px]">Blog</h2>
+            <p class="text-[#777777] text-[16px] font-[500] ">Home <span class="text-white">/ Blog</span></p>
+        </section>
+        <!-- main -->
+        <main class="mt-[64px] px-7 grid grid-cols-3 gap-9">
+            <!-- aside -->
+            <aside class="border px-8 py-8">
+                <form class="relative flex mb-9" action="">
+                    <i class="absolute top-[15px] right-[10px] text-red-600 fa-solid fa-magnifying-glass"></i>
+                    <input class="flex-[1] border border-red-500 outline-none px-2 py-2 w-[30px]" type="text"
+                        placeholder="Search Post...">
+                </form>
+                <div class="border-b mb-4">
+                    <a href="#">
+                        <img src="./img/blog-01.jpg" alt="">
+                    </a>
+                    <h3 class="mt-5 mb-3 font-[600] text-[16px]">SURVIVE LONG BIKE ROAD TRIPS</h3>
+                    <p class="text-[#ddd] text-[14px] font-[400] mb-5">21 May, 2022 by Katie</p>
+                </div>
+                <div class="border-b mb-4">
+                    <a href="#">
+                        <img src="./img/blog-02.jpg" alt="">
+                    </a>
+                    <h3 class="mt-5 mb-3 font-[600] text-[16px]">HOW DO BICYCLES OPERATE?</h3>
+                    <p class="text-[#ddd] text-[14px] font-[400] mb-5">28 May, 2022 by Linda</p>
+                </div>
+                <div class="border-b mb-4">
+                    <a href="#">
+                        <img src="./img/blog-03.jpg" alt="">
+                    </a>
+                    <h3 class="mt-5 mb-3 font-[600] text-[16px]">A BRIEF HISTORY OF BICYCLING</h3>
+                    <p class="text-[#ddd] text-[14px] font-[400] mb-5">02 May, 2022 by Megan</p>
+                </div>
+                <div class="mb-4">
+                    <a href="#">
+                        <img src="./img/blog-04.jpg" alt="">
+                    </a>
+                    <h3 class="mt-5 mb-3 font-[600] text-[16px]">TO BIKE OR NOT TO BIKE</h3>
+                    <p class="text-[#ddd] text-[14px] font-[400] mb-5">18 May, 2022 by Katie</p>
+                </div>
+            </aside>
+            <!-- article -->
+            <article class="col-span-2">
+                <section class="border px-8 py-8 mb-[66px]">
+                    <a href="#">
+                        <img src="./img/blog-1.jpg" alt="">
+                    </a>
+                    <h2 class="text-[#2f2f2f] text-[36px] my-4">Always Look On The Bright Side Of Life</h2>
+                    <p class="text-[#777777] text-[14px] leading-[28px] font-[400] mb-5">Ut tempus leo sed magna
+                        hendrerit, non congue libero blandit. Vestibulum libero diam, convallis in arcu ut, semper
+                        vulputate dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                        cubilia Curae usce luctus fringilla fermentum…</p>
+                    <div>
+                        <button
+                            class="bg-[#df453e] text-white font-semibold text-[18px] px-[36px] py-[18px] hover:bg-[#335154] hover:text-[#df453e] rounded">Read
+                            More</button>
+                    </div>
+                </section>
+                <section class="border px-8 py-8">
+                    <video controls
+                        src="./img/production ID_4133023.mp4">
+                    </video>
+                    <h2 class="text-[#2f2f2f] text-[36px] my-4">Philosophy As A Science</h2>
+                    <p class="text-[#777777] text-[14px] leading-[28px] font-[400] mb-5">Ut tempus leo sed magna
+                        hendrerit, non congue libero blandit. Vestibulum libero diam, convallis in arcu ut, semper
+                        vulputate dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                        cubilia Curae usce luctus fringilla fermentum…</p>
+                    <div>
+                        <button
+                            class="bg-[#df453e] text-white font-semibold text-[18px] px-[36px] py-[18px] hover:bg-[#335154] hover:text-[#df453e] rounded">Read
+                            More</button>
+                    </div>
+                </section>
+            </article>
+        </main>
+        <!-- footer -->
+        <footer class="mt-[64px] px-8 py-[64px] bg-[#335154] grid grid-cols-4 gap-6">
+            <div>
+                <a href="#">
+                    <img src="./img/logo.png" alt="">
+                </a>
+                <div class="flex mt-3 gap-4 ml-5">
+                    <i class="text-red-500 fa-brands fa-facebook"></i>
+                    <i class="text-red-500 fa-brands fa-twitter"></i>
+                    <i class="text-red-500 fa-brands fa-square-instagram"></i>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-[18px] font-[600] tracking-[1px] text-white">Want To Call With Us?</h3>
+                <div class="flex mt-3 gap-3 items-center">
+                    <i class="text-red-500 fa-solid fa-phone"></i>
+                    <p class="text-[#97adaf]">(+62) 123-321-543</p>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-[18px] font-[600] tracking-[1px] text-white">Want To Email With Us?</h3>
+                <div class="flex mt-3 gap-3 items-center">
+                    <i class="text-red-500 fa-solid fa-envelope"></i>
+                    <p class="text-[#97adaf]">Info@Example.Com</p>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-[18px] font-[600] tracking-[1px] text-white">Want To Visit Us?</h3>
+                <div class="flex mt-3 gap-3 items-center">
+                    <i class="text-red-500 fa-sharp fa-solid fa-location-dot"></i>
+                    <p class="text-[#97adaf]">121 King Street, New York 3000 USA.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
