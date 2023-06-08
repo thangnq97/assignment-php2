@@ -8,7 +8,7 @@
 
         public function path() {
             $path = $_SERVER['REQUEST_URI'];
-            $path = str_replace('/wd18103/assignment/', '/', $path);
+            $path = str_replace('/wd18103/assignment-php2/public/', '/', $path);
 
             // tìm vị trí ? ở $path
             $position = strpos($path, '?');

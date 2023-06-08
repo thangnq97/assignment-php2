@@ -12,7 +12,7 @@
 
         public function __construct() {
             try {
-                $this->conn = new PDO("mysql:host=localhost;dbname=php2;charset=utf8", "root", "");
+                $this->conn = new PDO("mysql:host=localhost;dbname=asm-php2;charset=utf8", "root", "");
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }catch(PDOException $e) {
                 echo "Có lỗi xảy ra <br>" . $e->getMessage();
@@ -95,6 +95,11 @@
         public function orWhere($colName, $condition, $value) {
             $this->sqlBuilder .= " OR $colName $condition '$value'";
 
+            return $this;
+        }
+
+        public function take($number) {
+            $this->sqlBuilder = "SELECT * FROM $this->tableName LIMIT $number";
             return $this;
         }
 
