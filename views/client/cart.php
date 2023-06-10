@@ -8,61 +8,34 @@
         <main class="grid grid-cols-2 gap-8 px-7">
             <!-- product -->
             <section class="flex flex-col gap-5 px-6 py-6">
-                <div class="grid grid-cols-4 border-b">
-                    <a href="#">
-                        <img src="./imgs/shopping1.jpg" alt="">
-                    </a>
-                    <div class="col-span-3 flex flex-col justify-center ">
-                        <h4 class="text-[14px] font-[600] text-[#335154] mt-3 mb-2">ROAD BICYCLES</h4>
-                        <div class=" flex justify-between">
-                            <p class="text-[#df453e] font-[600] text-[12px] text-[df453e] tracking-[1.5px]">512.00</p>
-                            <div class="flex items-center gap-2">
-                                <button class="item1_btn_sub text-[25px]">-</button>
-                                <input class="item1_input border w-[25px] outline-none border-orange-400 text-center text-[20px]" type="text" value="1">
-                                <button class="item1_btn_sum text-[20px]">+</button>
+                <?php foreach($data as $k => $v):?>
+                    <div class="grid grid-cols-4 border-b">
+                        <a href="">
+                            <img src="./imgs/<?php foreach($products as $pro){echo ($pro->id === $v['product_id']) ? $pro->image : '';}?>" class="w-[110px] h-[110px]" alt="">
+                        </a>
+                        <div class="col-span-3 flex flex-col justify-center ">
+                            <h4 class="text-[14px] font-[600] text-[#335154] mt-3 mb-2">
+                                <?php foreach($products as $pro) {
+                                    echo ($pro->id === $v['product_id']) ? $pro->name : '';
+                                }?>
+                            </h4>
+                            <div class=" flex justify-between">
+                                <p class="text-[#df453e] font-[600] text-[12px] text-[df453e] tracking-[1.5px]"><?= number_format($v['price'])?> | <?php foreach($colors as $color){echo ($color->id === $v['color_id']) ? $color->name : '';}?></p>
+                                <div class="flex items-center gap-8">
+                                    <p class="text-[#000] font-[600] text-[18px] text-[df453e] tracking-[1.5px]">x<?= $v['quantity']?></p>
+                                    <a href="./remove-cart?key=<?= $k?>" class="bg-[#df453e] text-white font-normal text-[15px] px-[8px] py-[4px] hover:bg-[#335154] hover:text-[#df453e] rounded">xóa</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="grid grid-cols-4 border-b">
-                    <a href="#">
-                        <img src="./imgs/shopping1.jpg" alt="">
-                    </a>
-                    <div class="col-span-3 flex flex-col justify-center ">
-                        <h4 class="text-[14px] font-[600] text-[#335154] mt-3 mb-2">ROAD BICYCLES</h4>
-                        <div class=" flex justify-between">
-                            <p class="text-[#df453e] font-[600] text-[12px] text-[df453e] tracking-[1.5px]">512.00</p>
-                            <div class="flex items-center gap-2">
-                                <button class="item1_btn_sub text-[25px]">-</button>
-                                <input class="item1_input border w-[25px] outline-none border-orange-400 text-center text-[20px]" type="text" value="1">
-                                <button class="item1_btn_sum text-[20px]">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-4 border-b">
-                    <a href="#">
-                        <img src="./imgs/shopping2.jpg" alt="">
-                    </a>
-                    <div class="col-span-3 flex flex-col justify-center ">
-                        <h4 class="text-[14px] font-[600] text-[#335154] mt-3 mb-2">ROAD BICYCLES</h4>
-                        <div class=" flex justify-between">
-                            <p class="text-[#df453e] font-[600] text-[12px] text-[df453e] tracking-[1.5px]">125.00</p>
-                            <div class="flex items-center gap-2">
-                                <button class="item2_btn_sub text-[25px]">-</button>
-                                <input class="item2_input border w-[25px] outline-none border-orange-400 text-center text-[20px]" type="text" value="1">
-                                <button class="item2_btn_sum text-[20px]">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach?>
             </section>
             <!-- order -->
             <section class="border-l px-6 py-6">
                 <h3 class="text-center text-[24px] font-[600] uppercase mb-5">Tóm tắt đơn hàng</h3>
                 <div class="flex justify-between mb-3">
                     <p class="text-[14px] font-[600]">Tổng giá trị sản phẩm:</p>
-                    <p class="text-[#df453e] font-[600] text-[12px] text-[df453e] tracking-[1.5px]">$<span class="total_price1">100</span></p>
+                    <p class="text-[#df453e] font-[600] text-[12px] text-[df453e] tracking-[1.5px]"><span class="total_price"><?= number_format($total_price)?></span></p>
                 </div>
                 <div class="flex justify-between mb-3">
                     <p class="text-[14px] font-[600]">Phí vận chuyển:</p>

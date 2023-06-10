@@ -76,6 +76,7 @@ use App\Router;
     Router::get('/pages', [HomeController::class, 'pages']);
     Router::post('/add-cart', [HomeController::class, 'addCart']);
     Router::get('/cart', [HomeController::class, 'showCart']);
+    Router::get('/remove-cart', [HomeController::class, 'removeCart']);
 
     $router->resolve();
 ?>

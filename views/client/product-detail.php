@@ -17,7 +17,7 @@
                 <form action="./add-cart" method="POST" class="flex flex-col gap-[32px]">
                     <input type="hidden" name="product_id" value="<?= $product->id?>">
                     <div class="flex gap-5 items-center ">
-                        <select class="w-[150px] h-[30px]" name="color" id="color">
+                        <select class="w-[150px] h-[30px]" name="color_id" id="color">
                             <?php foreach($colors as $color):?>
                                 <option value="<?= $color->id?>"><?= $color->name?></option>
                             <?php endforeach?>

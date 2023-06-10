@@ -155,15 +155,37 @@ use App\Request;
 
         public function addCart(Request $request) {
             $_SESSION['cart'] = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-            array_push($_SESSION['cart'], $request->body());
+            $product_id = $request->body()['product_id']; 
+            $color_id = $request->body()['color_id'];
+            $item = new ProductColorModel();
+            $item = $item->where('product_id', '=', "$product_id")->andWhere('color_id', '=', "$color_id")->get()[0];
+            array_push($_SESSION['cart'], ['quantity' => $request->body()['quantity'], 'product_id' => $item->product_id, 'color_id' => $item->color_id, 'price' => $item->price]);
+            header('location: ./cart');
         }
 
         public function showCart() {
             $data = $_SESSION['cart'];
             $title = 'Cart';
-
-            return $this->view('client/cart', ['title' => $title, 'data' => $data]);
+            $products = ProductModel::all();
+            $colors = ColorModel::all();
+            $total_price = 0;
+            foreach($data as $item) {
+                $total_price += ($item['price'] * $item['quantity']);
+            }
+            return $this->view('client/cart', ['title' => $title,
+                                                'data' => $data,
+                                                'products' => $products,
+                                                'colors' => $colors,
+                                                'total_price' => $total_price
+                                                ]);
         }
 
+        public function removeCart(Request $request) {
+            $key = $request->body()['key'];
+            unset($_SESSION['cart'][$key]);
+            $_SESSION['cart'] = array_values($_SESSION['cart']);
+            header('location: ./cart');
+            die;
+        }
     }
 ?>
