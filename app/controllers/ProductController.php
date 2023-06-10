@@ -24,7 +24,7 @@ use App\Request;
         public function store(Request $request) {
             $data = $request->body();
 
-            if($_FILES['image']['size'] < 0) {
+            if($_FILES['image']['size'] <= 0) {
                 $err['image'] = 'Hình ảnh không được để trống';
             }
             if(!$data['name']) {
@@ -41,6 +41,8 @@ use App\Request;
                 $image = $_FILES['image']['name'];
                 $data['image'] = $image;
                 move_uploaded_file($_FILES['image']['tmp_name'], './imgs/'.$image);
+                $product = new ProductModel();
+                $product->insert($data);
                 header('location: ./product-manager');
                 die;
             }
@@ -50,6 +52,36 @@ use App\Request;
 
             return $this->view('admin/product/add-product', ['cates' => $cates, 'title' => $title, 'err' => $err]);
 
+        }
+
+        public function show(Request $request) {
+            $id = $request->body()['id'];
+            $product = ProductModel::find($id);
+            $cates = CategoryModel::all();
+            $title = 'Sửa sản phẩm';
+
+            return $this->view('admin/product/edit-product', ['cates' => $cates, 'title' => $title, 'product' => $product]);
+        }
+
+        public function edit(Request $request) {
+            $data = $request->body();
+            if($_FILES['image']['size'] > 0) {
+                $image = $_FILES['image']['name'];
+                $data['image'] = $image;
+                move_uploaded_file($_FILES['image']['tmp_name'], './imgs/'.$image);
+            }
+            $product = new ProductModel();
+            $product->update($data['id'], $data);
+            $msg = 'Sửa thành công';
+            header("location: ./edit-product?id=".$data['id'].'&msg='.$msg);
+        }
+
+        public function delete(Request $request) {
+            $id = $request->body()['id'];
+
+            $product = new ProductModel();
+            $product->delete($id);
+            header("location: ./product-manager");
         }
     }
 

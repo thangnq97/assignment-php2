@@ -8,12 +8,12 @@
         </div>
         <div class="mb-3 form-group">
             <label for="" class="control-label">Detail</label>
-            <input type="text" name="detail" class="form-control" >
+            <textarea name="detail" id="" cols="30" rows="5" class="form-control"></textarea>
             <div class="help-block with-errors"><?= $err['detail'] ?? ''?></div>
         </div>
         <div class="mb-3 form-group">
             <label for="" class="control-label">Quantity</label>
-            <input type="text" name="quantity" class="form-control" >
+            <input type="number" name="quantity" class="form-control" >
             <div class="help-block with-errors"><?= $err['quantity'] ?? ''?></div>
         </div>
         <div class="mb-3 form-group">

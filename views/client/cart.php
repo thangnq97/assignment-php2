@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <!-- conatiner -->
-    <div class="max-w-[1440px mx-auto]">
-        <!-- header -->
-        <header class="px-7 py-5 flex justify-between items-center">
-            <a href="#">
-                <img src="./img/logo.png" alt="">
-            </a>
-            <div class="flex gap-6">
-                <nav>
-                    <ul class="flex gap-8">
-                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./home.html">Home</a></li>
-                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./pages.html">Pages</a></li>
-                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./shop.html">Shop</a></li>
-                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./blog.html">Blog</a></li>
-                    </ul>
-                </nav>
-                <a href="#" class="cursor-pointer">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </a>
-            </div>
-        </header>
+<?php require_once __DIR__."/header.php"?>
         <!-- banner -->
         <section class="py-10 text-center flex flex-col gap-5 bg-[#335154]">
             <h2 class="text-[#df453e] font-[800] text-[42px]">Shopping cart</h2>
@@ -95,42 +62,4 @@
                 </div>
             </section>
         </main>
-        <!-- footer -->
-        <footer class="mt-[64px] px-8 py-[64px] bg-[#335154] grid grid-cols-4 gap-6">
-            <div>
-                <a href="#">
-                    <img src="./img/logo.png" alt="">
-                </a>
-                <div class="flex mt-3 gap-4 ml-5">
-                    <i class="text-red-500 fa-brands fa-facebook"></i>
-                    <i class="text-red-500 fa-brands fa-twitter"></i>
-                    <i class="text-red-500 fa-brands fa-square-instagram"></i>
-                </div>
-            </div>
-            <div>
-                <h3 class="text-[18px] font-[600] tracking-[1px] text-white">Want To Call With Us?</h3>
-                <div class="flex mt-3 gap-3 items-center">
-                    <i class="text-red-500 fa-solid fa-phone"></i>
-                    <p class="text-[#97adaf]">(+62) 123-321-543</p>
-                </div>
-            </div>
-            <div>
-                <h3 class="text-[18px] font-[600] tracking-[1px] text-white">Want To Email With Us?</h3>
-                <div class="flex mt-3 gap-3 items-center">
-                    <i class="text-red-500 fa-solid fa-envelope"></i>
-                    <p class="text-[#97adaf]">Info@Example.Com</p>
-                </div>
-            </div>
-            <div>
-                <h3 class="text-[18px] font-[600] tracking-[1px] text-white">Want To Visit Us?</h3>
-                <div class="flex mt-3 gap-3 items-center">
-                    <i class="text-red-500 fa-sharp fa-solid fa-location-dot"></i>
-                    <p class="text-[#97adaf]">121 King Street, New York 3000 USA.</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <script src="./main.js"></script>
-</body>
-</html>
+<?php require_once __DIR__."/footer.php"?>

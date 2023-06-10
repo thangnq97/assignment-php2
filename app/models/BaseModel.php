@@ -98,8 +98,8 @@
             return $this;
         }
 
-        public function take($number) {
-            $this->sqlBuilder = "SELECT * FROM $this->tableName LIMIT $number";
+        public function take($number1, $number2) {
+            $this->sqlBuilder = "SELECT * FROM $this->tableName LIMIT $number1,$number2";
             return $this;
         }
 

@@ -61,49 +61,49 @@
                 <li>
                     <a href="./user-manager">
                         <i class="pe-7s-user"></i>
-                        <p>User Manager</p>
+                        <p>User</p>
                     </a>
                 </li>
                 <li>
                     <a href="./product-manager">
                         <i class="pe-7s-note2"></i>
-                        <p>Product Manager</p>
+                        <p>Product</p>
                     </a>
                 </li>
                 <li>
                     <a href="./comment-manager">
                         <i class="pe-7s-chat"></i>
-                        <p>Comment Manager</p>
+                        <p>Comment</p>
                     </a>
                 </li>
                 <li>
                     <a href="bill-manager">
                         <i class="pe-7s-cart"></i>
-                        <p>Bill Manager</p>
+                        <p>Bill</p>
                     </a>
                 </li>
                 <li>
-                    <a href="brand-manager">
+                    <a href="category-manager">
                         <i class="pe-7s-note2"></i>
-                        <p>Category Manager</p>
+                        <p>Category</p>
                     </a>
                 </li>
                 <li>
-                    <a href="./size-manager"> 
+                    <a href="./color-manager"> 
                         <i class="pe-7s-copy-file"></i>
-                        <p>Color Manager</p>
+                        <p>Color</p>
                     </a>
                 </li>
                 <li>
                     <a href="./voucher-manager">
                         <i class="pe-7s-gift"></i>
-                        <p>Voucher Manager</p>
+                        <p>Voucher</p>
                     </a>
                 </li>
                 <li>
-                    <a href="./product-manager">
+                    <a href="./pro_color-manager">
                         <i class="pe-7s-note2"></i>
-                        <p>Product-color Manager</p>
+                        <p>Product-color</p>
                     </a>
                 </li>
             </ul>

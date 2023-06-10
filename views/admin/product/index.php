@@ -6,7 +6,7 @@
             <th>ID</th>
             <th>NAME</th>
             <th>IMG</th>
-            <th>detail</th>
+            <th style="width: 33%;">detail</th>
             <th>category</th>
             <th>quantity</th>
             <th>
@@ -21,7 +21,7 @@
                     <td>
                         <img src="./imgs/<?= $pro->image?>" style="width: 150px; height: 150px;">
                     </td>
-                    <td><?= $pro->detail?></td>
+                    <td class="w-30"><?= $pro->detail?></td>
                     <td>
                         <?php foreach($cates as $cate) {
                             echo ($cate->id === $pro->cate_id) ? $cate->name : '';
@@ -30,7 +30,7 @@
                     <td><?= $pro->quantity?></td>
                     <td>
                         <a class="btn btn-success" href="./edit-product?id=<?= $pro->id?>">edit</a>
-                        <a class="btn btn-danger" href="./delete-product?id=<?= $pro->id?>">delete</a>
+                        <a onclick="return confirm('are you sure?')" class="btn btn-danger" href="./delete-product?id=<?= $pro->id?>">delete</a>
                     </td>
                 </tr>
             <?php endforeach?>
