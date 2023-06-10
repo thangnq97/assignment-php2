@@ -77,6 +77,8 @@ use App\Router;
     Router::post('/add-cart', [HomeController::class, 'addCart']);
     Router::get('/cart', [HomeController::class, 'showCart']);
     Router::get('/remove-cart', [HomeController::class, 'removeCart']);
+    Router::post('/confirm', [HomeController::class, 'viewConfirm']);
+    Router::post('/confirmCart', [HomeController::class, 'confirm']);
 
     $router->resolve();
 ?>

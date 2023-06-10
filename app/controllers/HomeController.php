@@ -1,14 +1,18 @@
 <?php
     namespace App\Controllers;
 
+use App\Models\BillModel;
 use App\Models\ColorModel;
 use App\Models\CommentModel;
 use App\Models\ProductColorModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
+use App\Models\VoucherModel;
 use App\Request;
+use PDO;
 
     class HomeController extends Controller {
+        protected $id;
         public function index() {
             $product = new ProductModel();
             $top4 = $product->take(0,4)->get();
@@ -172,11 +176,17 @@ use App\Request;
             foreach($data as $item) {
                 $total_price += ($item['price'] * $item['quantity']);
             }
+            $_SESSION['total_price'] = $total_price;
+            $now = date('Y-m-d');
+            $voucher = new VoucherModel();
+            $vouchers = $voucher->where('min_price', '<=', "$total_price")->andWhere('quantity', '>', 0)->andWhere('expiry', '>=', $now)->get();
+
             return $this->view('client/cart', ['title' => $title,
                                                 'data' => $data,
                                                 'products' => $products,
                                                 'colors' => $colors,
-                                                'total_price' => $total_price
+                                                'total_price' => $total_price,
+                                                'vouchers' => $vouchers
                                                 ]);
         }
 
@@ -186,6 +196,54 @@ use App\Request;
             $_SESSION['cart'] = array_values($_SESSION['cart']);
             header('location: ./cart');
             die;
+        }
+
+        public function viewConfirm(Request $request) {
+            $title = 'Confirm';
+            $voucher = ($request->body()['voucher_id'] == 0) ? null : $request->body()['voucher_id'];
+            
+            return $this->view('client/confirm', ['title' => $title, 'voucher' => $voucher]);
+        }
+
+        public function confirm(Request $request) {
+            $data = $request->body();
+
+            if(!$data['fullname']) {
+                $err['fullname'] = 'Họ tên không được để trống';
+            }
+            if(!$data['email']) {
+                $err['email'] = 'Email không được để trống';
+            }
+            if(!$data['address']) {
+                $err['address'] = 'Địa chỉ không được để trống';
+            }
+            if(!$data['phone']) {
+                $err['phone'] = 'Số điện thoại không được để trống';
+            }
+
+            if(!isset($err)) {
+                $discount = isset($data['voucher_id']) ? $data['voucher_id'] : null;
+
+                if($discount) {
+                    $voucher = new VoucherModel();
+                    $discount = $voucher->where('id', '=', "$discount")->get()[0];
+                    $discount = $discount->discount;
+
+                    $_SESSION['total_price'] -= $discount;
+                    $data['total_price'] = $_SESSION['total_price'];
+                }
+
+                if(isset($_SESSION['user'])) {
+                    $data['user_id'] = $_SESSION['user']['id'];
+                }
+
+                $bill = new BillModel();
+                $conn = $bill->insert($data);
+                $id = $conn->lastInsertId();
+                echo $id;
+            }
+
+
         }
     }
 ?>

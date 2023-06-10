@@ -56,6 +56,8 @@
 
             $stmt = $this->conn->prepare($this->sqlBuilder);
             $stmt->execute($arr);
+
+            return $this->conn;
         }
 
         public function update($id, $arr) {
