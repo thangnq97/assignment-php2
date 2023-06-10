@@ -17,20 +17,33 @@
     <div class="max-w-[1440px] mx-auto">
         <!-- header -->
         <header class="px-7 py-5 flex justify-between items-center">
-            <a href="#">
-                <img src="./img/logo.png" alt="">
+            <a href="./">
+                <img src="./imgs/logo.png" alt="">
             </a>
-            <div class="flex gap-6">
-                <nav>
+            <div class="flex gap-10">
+                <nav class="flex gap-5">
                     <ul class="flex gap-8">
-                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="#">Home</a></li>
-                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./pages.html">Pages</a></li>
-                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./shop.html">Shop</a></li>
-                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./blog.html">Blog</a></li>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./">Home</a></li>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./pages">Pages</a></li>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./shop?page=1">Shop</a></li>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./blog">Blog</a></li>
                     </ul>
+                    <a href="./cart" class="cursor-pointer">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
                 </nav>
-                <a href="./cart.html" class="cursor-pointer">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </a>
+                <ul class="flex gap-4">
+                    <?php if(!isset($_SESSION['user'])):?>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./sign-in">Sign in</a></li>
+                    <?php endif?>
+                    <?php if(isset($_SESSION['user'])):?>
+                        <?php if(($_SESSION['user']['role'] === 'admin')):?>
+                            <li><a class="text-[18px] font-semibold hover:text-red-500" href="./admin">Admin</a></li>
+                        <?php endif?>
+                    <?php endif?>
+                    <?php if(isset($_SESSION['user'])):?>
+                        <li><a class="text-[18px] font-semibold hover:text-red-500" href="./sign-out">Sign out</a></li>
+                    <?php endif?>
+                </ul>
             </div>
         </header>

@@ -14,15 +14,80 @@
                     <h3 class="text-[43px] font-[700] tracking-[1.5px] text-[#1b3e41]"><?= number_format($price)?></h3>
                     <p class="text-[16px] font-[400] leading-[24px] text-[#393939] "><?= $product->detail?></p>
                 </div>
-                <div class="flex gap-5 items-center">
-                    <div class="flex gap-3">
-                        <button class="item1_btn_sub text-[25px]">-</button>
-                        <input class="item1_input border w-[25px] outline-none border-orange-400 text-center text-[20px]" type="text" value="1">
-                        <button class="item1_btn_sum text-[20px]">+</button>
+                <form action="./add-cart" method="POST" class="flex flex-col gap-[32px]">
+                    <input type="hidden" name="product_id" value="<?= $product->id?>">
+                    <div class="flex gap-5 items-center ">
+                        <select class="w-[150px] h-[30px]" name="color" id="color">
+                            <?php foreach($colors as $color):?>
+                                <option value="<?= $color->id?>"><?= $color->name?></option>
+                            <?php endforeach?>
+                        </select>
+                        <div class="color-render w-[150px] h-[60px] bg-[#60A5FA]"></div>
                     </div>
-                    <div>
-                        <button class="bg-[#df453e] text-white font-semibold text-[18px] px-[36px] py-[18px] hover:bg-[#335154] hover:text-[#df453e] rounded">Đặt hàng</button>
+                    <div class="flex gap-5 items-center">
+                        <div class="flex gap-3">
+                            <input name="quantity" class="quantity item1_input border w-[40px] outline-none border-orange-400 text-center text-[20px]" type="number" value="1">
+                        </div>
+                        <div>
+                            <button type="submit" class="bg-[#df453e] text-white font-semibold text-[18px] px-[36px] py-[18px] hover:bg-[#335154] hover:text-[#df453e] rounded">Đặt hàng</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-</main><?php require_once __DIR__."/footer.php"?>
+            
+            <!-- js -->
+            <script>
+                let data = <?php echo json_encode($colors);?>;
+                // data = Array.from(data);
+                console.log(data);
+
+
+                // render color
+
+                const color = document.querySelector('#color');
+                const colorRender = document.querySelector('.color-render');
+                const quantity = document.querySelector('.quantity');
+
+                color.addEventListener('change', (e) => {
+                    
+                    data.forEach((item) => {
+                        if(item.id == e.target.value) {
+                            var color_target = item.hex;
+                        }
+                        colorRender.style.backgroundColor = `${color_target}`;
+                    })
+                })
+
+                // handler quantity
+                quantity.addEventListener('change', (e) => {
+                    if(e.target.value <= 0) {
+                        quantity.value = 1;
+                    }
+                })
+
+            </script>
+            <!-- end js -->
+
+        </main>
+        <section class="bg-[#f0f2f2] flex flex-col gap-8 mt-[50px]">
+            <div class="flex flex-col gap-7 mt-5 mb-6 ml-5">
+                <?php foreach($comments as $cmt):?>
+                    <div class="flex flex-col gap-3">
+                        <h6 class="text-red-400 font-[500] text-[18px]">
+                            <?php foreach($users as $user) {
+                                echo ($cmt->user_id === $user->id) ? $user->username : '';
+                            }?>
+                        </h6>
+                        <p class="text-black font-[300] text-[15px]"><?= $cmt->create_at?></p>
+                        <p class="text-black font-[300] text-[15px]"><?= $cmt->content?></p>
+                    </div>
+                <?php endforeach?>
+            </div>
+            <?php if(isset($user)):?>
+                <form action="" class=" mt-5 mb-6 ml-5 flex gap-4">
+                    <textarea class="outline-none focus:outline-blue-400 rounded" name="comment" id="" cols="40" rows="5"></textarea>
+                    <div class="flex items-center"><input class="px-[10px] py-[5px] bg-[#df453e] text-white hover:bg-[#335154] hover:text-[#df453e] rounded" type="submit" value="submit"></div>
+                </form>
+            <?php endif?>
+        </section>
+<?php require_once __DIR__."/footer.php"?>

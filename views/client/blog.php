@@ -10,28 +10,28 @@
                 </form>
                 <div class="border-b mb-4">
                     <a href="#">
-                        <img src="./img/blog-01.jpg" alt="">
+                        <img src="./imgs/blog-01.jpg" alt="">
                     </a>
                     <h3 class="mt-5 mb-3 font-[600] text-[16px]">SURVIVE LONG BIKE ROAD TRIPS</h3>
                     <p class="text-[#ddd] text-[14px] font-[400] mb-5">21 May, 2022 by Katie</p>
                 </div>
                 <div class="border-b mb-4">
                     <a href="#">
-                        <img src="./img/blog-02.jpg" alt="">
+                        <img src="./imgs/blog-02.jpg" alt="">
                     </a>
                     <h3 class="mt-5 mb-3 font-[600] text-[16px]">HOW DO BICYCLES OPERATE?</h3>
                     <p class="text-[#ddd] text-[14px] font-[400] mb-5">28 May, 2022 by Linda</p>
                 </div>
                 <div class="border-b mb-4">
                     <a href="#">
-                        <img src="./img/blog-03.jpg" alt="">
+                        <img src="./imgs/blog-03.jpg" alt="">
                     </a>
                     <h3 class="mt-5 mb-3 font-[600] text-[16px]">A BRIEF HISTORY OF BICYCLING</h3>
                     <p class="text-[#ddd] text-[14px] font-[400] mb-5">02 May, 2022 by Megan</p>
                 </div>
                 <div class="mb-4">
                     <a href="#">
-                        <img src="./img/blog-04.jpg" alt="">
+                        <img src="./imgs/blog-04.jpg" alt="">
                     </a>
                     <h3 class="mt-5 mb-3 font-[600] text-[16px]">TO BIKE OR NOT TO BIKE</h3>
                     <p class="text-[#ddd] text-[14px] font-[400] mb-5">18 May, 2022 by Katie</p>
@@ -41,7 +41,7 @@
             <article class="col-span-2">
                 <section class="border px-8 py-8 mb-[66px]">
                     <a href="#">
-                        <img src="./img/blog-1.jpg" alt="">
+                        <img src="./imgs/blog-1.jpg" alt="">
                     </a>
                     <h2 class="text-[#2f2f2f] text-[36px] my-4">Always Look On The Bright Side Of Life</h2>
                     <p class="text-[#777777] text-[14px] leading-[28px] font-[400] mb-5">Ut tempus leo sed magna
@@ -56,7 +56,7 @@
                 </section>
                 <section class="border px-8 py-8">
                     <video controls
-                        src="./img/production ID_4133023.mp4">
+                        src="./imgs/production ID_4133023.mp4">
                     </video>
                     <h2 class="text-[#2f2f2f] text-[36px] my-4">Philosophy As A Science</h2>
                     <p class="text-[#777777] text-[14px] leading-[28px] font-[400] mb-5">Ut tempus leo sed magna

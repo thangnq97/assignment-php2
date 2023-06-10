@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 10, 2023 lúc 07:01 AM
--- Phiên bản máy phục vụ: 10.4.25-MariaDB
--- Phiên bản PHP: 8.0.23
+-- Thời gian đã tạo: Th6 10, 2023 lúc 12:47 PM
+-- Phiên bản máy phục vụ: 10.4.27-MariaDB
+-- Phiên bản PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,13 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bill` (
   `id` int(11) NOT NULL,
-  `fullname` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `phone` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `fullname` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `total_price` int(11) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL DEFAULT 'Đang xử lý',
+  `status` varchar(50) NOT NULL DEFAULT 'Đang xử lý',
   `user_id` int(11) DEFAULT NULL,
   `voucher_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -62,7 +62,7 @@ CREATE TABLE `bill_detail` (
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
@@ -84,17 +84,18 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 
 CREATE TABLE `colors` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL
+  `name` varchar(50) NOT NULL,
+  `hex` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `colors`
 --
 
-INSERT INTO `colors` (`id`, `name`) VALUES
-(2, 'Xanh dương'),
-(3, 'Đen'),
-(5, 'Vàng');
+INSERT INTO `colors` (`id`, `name`, `hex`) VALUES
+(2, 'Xanh dương', '#60A5FA'),
+(3, 'Đen', '#000000'),
+(5, 'Vàng', '#FACC33');
 
 -- --------------------------------------------------------
 
@@ -104,7 +105,7 @@ INSERT INTO `colors` (`id`, `name`) VALUES
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
-  `content` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `content` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -118,11 +119,11 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `detail` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `detail` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
   `cate_id` int(11) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
@@ -202,10 +203,10 @@ INSERT INTO `product_color` (`id`, `product_id`, `color_id`, `price`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `role` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL DEFAULT 'user'
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
@@ -213,7 +214,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`) VALUES
-(1, 'thangnq', '1234', 'thangmanu.97@gmail.com', 'user');
+(1, 'admin', '1234', 'thangmanu.97@gmail.com', 'admin'),
+(3, 'thangnq', '1234', 'thangnq@gmail.com', 'user');
 
 -- --------------------------------------------------------
 
@@ -223,7 +225,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`) VALUES
 
 CREATE TABLE `vouchers` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
   `discount` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `min_price` int(11) NOT NULL,
@@ -355,7 +357,7 @@ ALTER TABLE `product_color`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `vouchers`

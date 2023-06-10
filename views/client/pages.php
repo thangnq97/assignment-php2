@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="px-6 col-span-2">
-                <img class="object-cover" src="./img/educate.jpg" alt="">
+                <img class="object-cover" src="./imgs/educate.jpg" alt="">
             </div>
         </section>
         <!-- statistical -->
@@ -60,28 +60,28 @@
             <div class="grid grid-cols-4 gap-5">
                 <div class="bg-[#335154] flex flex-col items-center px-5 py-5">
                     <a href="#">
-                        <img src="./img/team-1.jpg" alt="">
+                        <img src="./imgs/team-1.jpg" alt="">
                     </a>
                     <h3 class="text-[26px] font-[500] text-[#df453e] mt-5 mb-3">Mr. Mike Banding</h3>
                     <p class="text-[15px] font-[400]">Manager</p>
                 </div>
                 <div class="bg-[#335154] flex flex-col items-center px-5 py-5">
                     <a href="#">
-                        <img src="./img/team-2.jpg" alt="">
+                        <img src="./imgs/team-2.jpg" alt="">
                     </a>
                     <h3 class="text-[26px] font-[500] text-[#df453e] mt-5 mb-3">Mr. Peter Pan</h3>
                     <p class="text-[15px] font-[400]">Developer</p>
                 </div>
                 <div class="bg-[#335154] flex flex-col items-center px-5 py-5">
                     <a href="#">
-                        <img src="./img/team-3.jpg" alt="">
+                        <img src="./imgs/team-3.jpg" alt="">
                     </a>
                     <h3 class="text-[26px] font-[500] text-[#df453e] mt-5 mb-3">Ms. Sophia</h3>
                     <p class="text-[15px] font-[400]">Designer</p>
                 </div>
                 <div class="bg-[#335154] flex flex-col items-center px-5 py-5">
                     <a href="#">
-                        <img src="./img/team-4.jpg" alt="">
+                        <img src="./imgs/team-4.jpg" alt="">
                     </a>
                     <h3 class="text-[26px] font-[500] text-[#df453e] mt-5 mb-3">Mr. John Lee</h3>
                     <p class="text-[15px] font-[400]">Chairmen</p>

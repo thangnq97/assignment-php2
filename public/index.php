@@ -1,6 +1,7 @@
 <?php
     session_start();
     date_default_timezone_set("Asia/Bangkok");
+    // var_dump($_SESSION['user']);die;
 
     require_once __DIR__ ."/../vendor/autoload.php";
     require_once __DIR__ ."/../app/config.php";
@@ -66,6 +67,15 @@ use App\Router;
     Router::get('/', [HomeController::class, 'index']);
     Router::get('/shop', [HomeController::class, 'shop']);
     Router::get('/product-detail', [HomeController::class, 'detail']);
+    Router::get('/register', [HomeController::class, 'viewRegister']);
+    Router::post('/register', [HomeController::class, 'register']);
+    Router::get('/sign-in', [HomeController::class, 'viewSignIn']);
+    Router::post('/sign-in', [HomeController::class, 'signIn']);
+    Router::get('/sign-out', [HomeController::class, 'signOut']);
+    Router::get('/blog', [HomeController::class, 'blog']);
+    Router::get('/pages', [HomeController::class, 'pages']);
+    Router::post('/add-cart', [HomeController::class, 'addCart']);
+    Router::get('/cart', [HomeController::class, 'showCart']);
 
     $router->resolve();
 ?>

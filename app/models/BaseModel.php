@@ -109,5 +109,17 @@
             
             return $stmt->fetchAll(PDO::FETCH_CLASS);
         }
+
+        public function findIn($array) {
+            $this->sqlBuilder = "SELECT * FROM $this->tableName WHERE $this->id IN (";
+            foreach($array as $k => $v) {
+                $this->sqlBuilder .= "$v, ";
+            }
+
+            $this->sqlBuilder = rtrim($this->sqlBuilder, ', ');
+            $this->sqlBuilder .= ")";
+            
+            return $this;
+        }
     }
 ?>

@@ -1,8 +1,11 @@
 <?php
     namespace App\Controllers;
 
+use App\Models\ColorModel;
+use App\Models\CommentModel;
 use App\Models\ProductColorModel;
 use App\Models\ProductModel;
+use App\Models\UserModel;
 use App\Request;
 
     class HomeController extends Controller {
@@ -33,8 +36,134 @@ use App\Request;
             $item = $pro_color->where('product_id', '=', "$id")->andWhere('color_id', '=', '2')->get();
             $price = $item[0]->price;
             $title = 'Chi tiết sản phẩm';
+            $pro_color_id = $pro_color->where('product_id', '=', "$id")->get();
+            $arr = [];
+            foreach($pro_color_id as $item) {
+                array_push($arr,$item->color_id);
+            }
+            
+            $colors = new ColorModel();
+            $colors = $colors->findIn($arr)->get();
 
-            return $this->view('client/product-detail',['title' => $title, 'product' => $product, 'price' => $price]);
+            $comments = new CommentModel();
+            $comments = $comments->where("product_id", "=", "$id")->get();
+
+            $users = UserModel::all();
+            $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+
+            return $this->view('client/product-detail',['title' => $title,
+                                                        'product' => $product,
+                                                        'price' => $price, 
+                                                        'colors' => $colors,
+                                                        'comments' => $comments,
+                                                        'users' => $users,
+                                                        'user' => $user
+
+            ]);
         }
+
+        public function viewRegister() {
+            $title = 'Register';
+            return $this->view('client/register', ['title' => $title]);
+        }
+
+        public function register(Request $request) {
+            $data = $request->body();
+
+            if(!$data['username']) {
+                $err['username'] = 'username không được để trống';
+            }
+            if(!$data['email']) {
+                $err['email'] = 'email không được để trống';
+            }
+            if(!$data['password']) {
+                $err['password'] = 'password không được để trống';
+            }
+
+            $users = UserModel::all();
+            foreach($users as $user) {
+                if($user->username === $data['username']) {
+                    $err['username'] = 'username đã tồn tại';
+                }
+                if($user->email === $data['email']) {
+                    $err['email'] = 'email đã có người sử dụng';
+                }
+            }
+
+            if(!$err) {
+                $user = new UserModel();
+                $user->insert($data);
+                header('location : ./sign-in');
+                die;
+            }
+
+            $title = 'Register';
+            return $this->view('client/register', ['title' => $title, 'err' => $err]);
+        }
+
+        public function viewSignIn() {
+            if(!empty($_SESSION['user'])) {
+                header('location: ./');
+                die;
+            }
+            $title = 'Sign in';
+            return $this->view('client/sign-in', ['title' => $title]);
+        }
+
+        public function signIn(Request $request) {
+            
+            $data = $request->body();
+            $users = UserModel::all();
+            foreach($users as $user) {
+                if($user->username !== $data['username'] && $user->password !== $data['password']) {
+                    $err['signin'] = 'Tài khoản hoặc mật khẩu không đúng';
+                }
+            }
+
+            if(!$err) {
+                $user = new UserModel();
+                $username = $data['username'];
+                $password = $data['password'];
+                $user = $user->where('username', '=', "$username")->andWhere('password', '=', "$password")->get();
+                $_SESSION['user']['username'] = $user[0]->username;
+                $_SESSION['user']['role'] = $user[0]->role;
+                $_SESSION['user']['id'] = $user[0]->id;
+                header('location: ./');
+                die;
+            }
+
+            $title = 'Sign in';
+            return $this->view('client/sign-in', ['title' => $title, 'err' => $err]);
+        }
+
+        public function signOut() {
+            unset($_SESSION['user']);
+            unset($_SESSION['cart']);
+            
+            header('location: ./sign-in');
+        }
+
+        public function pages() {
+            $title = 'Pages';
+            return $this->view('client/pages',['title' => $title]);
+        }
+
+        public function blog() {
+            $title = 'Blog';
+            return $this->view('client/blog',['title' => $title]);
+        }
+
+        public function addCart(Request $request) {
+            $_SESSION['cart'] = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+            array_push($_SESSION['cart'], $request->body());
+        }
+
+        public function showCart() {
+            $data = $_SESSION['cart'];
+            $title = 'Cart';
+
+            return $this->view('client/cart', ['title' => $title, 'data' => $data]);
+        }
+
     }
 ?>

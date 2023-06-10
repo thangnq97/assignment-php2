@@ -10,7 +10,7 @@
             <section class="flex flex-col gap-5 px-6 py-6">
                 <div class="grid grid-cols-4 border-b">
                     <a href="#">
-                        <img src="./img/shopping1.jpg" alt="">
+                        <img src="./imgs/shopping1.jpg" alt="">
                     </a>
                     <div class="col-span-3 flex flex-col justify-center ">
                         <h4 class="text-[14px] font-[600] text-[#335154] mt-3 mb-2">ROAD BICYCLES</h4>
@@ -26,7 +26,23 @@
                 </div>
                 <div class="grid grid-cols-4 border-b">
                     <a href="#">
-                        <img src="./img/shopping2.jpg" alt="">
+                        <img src="./imgs/shopping1.jpg" alt="">
+                    </a>
+                    <div class="col-span-3 flex flex-col justify-center ">
+                        <h4 class="text-[14px] font-[600] text-[#335154] mt-3 mb-2">ROAD BICYCLES</h4>
+                        <div class=" flex justify-between">
+                            <p class="text-[#df453e] font-[600] text-[12px] text-[df453e] tracking-[1.5px]">512.00</p>
+                            <div class="flex items-center gap-2">
+                                <button class="item1_btn_sub text-[25px]">-</button>
+                                <input class="item1_input border w-[25px] outline-none border-orange-400 text-center text-[20px]" type="text" value="1">
+                                <button class="item1_btn_sum text-[20px]">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-4 border-b">
+                    <a href="#">
+                        <img src="./imgs/shopping2.jpg" alt="">
                     </a>
                     <div class="col-span-3 flex flex-col justify-center ">
                         <h4 class="text-[14px] font-[600] text-[#335154] mt-3 mb-2">ROAD BICYCLES</h4>
