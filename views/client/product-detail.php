@@ -28,9 +28,13 @@
                         <div class="flex gap-3">
                             <input name="quantity" class="quantity item1_input border w-[40px] outline-none border-orange-400 text-center text-[20px]" type="number" value="1">
                         </div>
-                        <div>
-                            <button type="submit" class="bg-[#df453e] text-white font-semibold text-[18px] px-[36px] py-[18px] hover:bg-[#335154] hover:text-[#df453e] rounded">Đặt hàng</button>
-                        </div>
+                        <?php if($check):?>
+                            <div>
+                                <button type="submit" class="bg-[#df453e] text-white font-semibold text-[18px] px-[36px] py-[18px] hover:bg-[#335154] hover:text-[#df453e] rounded">Đặt hàng</button>
+                            </div>
+                            <?php else:?>
+                                <h4 class="font-semibold text-[18px] text-red-500">Hết hàng</h4>
+                            <?php endif?>
                     </div>
                 </form>
             </div>
@@ -83,9 +87,10 @@
                     </div>
                 <?php endforeach?>
             </div>
-            <?php if(isset($user)):?>
-                <form action="" class=" mt-5 mb-6 ml-5 flex gap-4">
-                    <textarea class="outline-none focus:outline-blue-400 rounded" name="comment" id="" cols="40" rows="5"></textarea>
+            <?php if(isset($_SESSION['user'])):?>
+                <form action="./add-comment" class=" mt-5 mb-6 ml-5 flex gap-4" method="POST">
+                    <input type="hidden" value="<?= $product->id?>" name="product_id">
+                    <textarea class="outline-none focus:outline-blue-400 rounded" name="content" id="" cols="40" rows="5" required></textarea>
                     <div class="flex items-center"><input class="px-[10px] py-[5px] bg-[#df453e] text-white hover:bg-[#335154] hover:text-[#df453e] rounded" type="submit" value="submit"></div>
                 </form>
             <?php endif?>

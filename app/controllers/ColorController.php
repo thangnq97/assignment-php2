@@ -24,7 +24,7 @@ use App\Request;
                 $err['name'] = 'Tên không được để trống';
             }
             
-            if(!$err) {
+            if(!isset($err)) {
                 $color = new ColorModel();
                 $color->insert($data);
                 header('location: ./color-manager');

@@ -18,9 +18,9 @@
                 <tr>
                     <td><?= $voucher->id?></td>
                     <td><?= $voucher->name?></td>
-                    <td><?= $voucher->discount?></td>
+                    <td><?= number_format($voucher->discount)?></td>
                     <td><?= $voucher->quantity?></td>
-                    <td><?= $voucher->min_price?></td>
+                    <td><?= number_format($voucher->min_price)?></td>
                     <td><?= $voucher->expiry?></td>
                     <td>
                         <a class="btn btn-success" href="./edit-voucher?id=<?= $voucher->id?>">edit</a>

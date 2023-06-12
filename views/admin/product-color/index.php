@@ -25,7 +25,7 @@
                             echo ($color->id === $item->color_id) ? $color->name : '';
                         }?>
                     </td>
-                    <td><?= $item->price?></td>
+                    <td><?= number_format($item->price)?></td>
                     <td>
                         <a class="btn btn-success" href="./edit-pro_color?id=<?= $item->id?>">edit</a>
                         <a onclick="return confirm('are you sure?')" class="btn btn-danger" href="./delete-pro_color?id=<?= $item->id?>">delete</a>

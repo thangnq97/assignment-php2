@@ -29,7 +29,7 @@ use App\Request;
             if(!$data['price']) {
                 $err['price'] = 'Giá không được để trống';
             }
-            if(!$err){
+            if(!isset($err)){
                 $item = new ProductColorModel();
                 $item->insert($data);
                 header('location: ./pro_color-manager');

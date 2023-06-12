@@ -36,7 +36,7 @@ use App\Request;
                 $err['expiry'] = 'Hạn dùng không được để trống';
             }
 
-            if(!$err) {
+            if(!isset($err)) {
                 $voucher = new VoucherModel();
                 $voucher->insert($data);
                 header('location: ./voucher-manager');

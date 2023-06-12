@@ -23,6 +23,7 @@ use App\Request;
             $title = 'Chi tiết bill';
             $item = new BillDetailModel();
             $bill_detail = $item->where('bill_id', '=', "$id")->get();
+            
             $data = [];
             foreach($bill_detail as $item) {
                 $pro_color_id = $item->pro_color_id;
@@ -34,7 +35,6 @@ use App\Request;
                 $total_price = $item->total_price;
                 array_push($data, ['product' => $product, 'color' => $color, 'id' => $detail_id, 'quantity' => $quantity, 'total_price' => $total_price]);
             }
-
             return $this->view('admin/bill/detail', ['title' => $title, 'data' => $data]);
         }
 

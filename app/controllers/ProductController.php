@@ -37,7 +37,7 @@ use App\Request;
                 $err['detail'] = 'Chi tiết sản phẩm không được để trống';
             }
 
-            if(!$err) {
+            if(!isset($err)) {
                 $image = $_FILES['image']['name'];
                 $data['image'] = $image;
                 move_uploaded_file($_FILES['image']['tmp_name'], './imgs/'.$image);

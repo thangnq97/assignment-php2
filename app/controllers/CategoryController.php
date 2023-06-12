@@ -25,7 +25,7 @@ use App\Request;
                 $err['name'] = 'Tên không được để trống';
             }
             
-            if(!$err) {
+            if(!isset($err)) {
                 $cate = new CategoryModel();
                 $cate->insert($data);
                 header('location: ./category-manager');

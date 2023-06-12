@@ -50,15 +50,30 @@
             </section>
             <!-- form -->
             <section>
-                <form class="form w-[80%]" action="./confirmCart" method="POST">
+                <form class="form w-[80%]" action="./confirm-bill" method="POST">
                     <input type="hidden" value="<?= $voucher ?? null;?>" name="voucher_id">
-                    <input class="user_name border pl-3 py-3 outline-none w-full mb-4 focus:border-blue-400" type="text" placeholder="Your name" name="fullname">
-                    <div class="mb-4 flex justify-between">
-                        <input class="email border pl-3 py-3 outline-none w-[48%] focus:border-blue-400" type="email" placeholder="Your email" name="email">
-                        <input class="phone border pl-3 py-3 outline-none w-[48%] focus:border-blue-400" type="text" placeholder="Your phone" name="phone">
+                    <div class="mb-4">
+                        <input class="user_name border pl-3 py-3 outline-none w-full focus:border-blue-400" type="text" placeholder="Your name" name="fullname">
+                        <p class="text-[13px] font-normal text-red-500"><?= $err['fullname'] ?? '';?></p>
                     </div>
-                    <input class="w-full border pl-3 py-3 outline-none w-[48%] focus:border-blue-400 mb-4" type="text" placeholder="Your address" name="address">
-                    <input class="w-full bg-red-500 text-white h-[50px] cursor-pointer uppercase text-[]" type="submit" value="submit">
+                    <div class="mb-4 flex justify-between gap-3">
+                        <div class="flex-[1]">
+                            <input class="email border pl-3 py-3 outline-none w-full focus:border-blue-400" type="email" placeholder="Your email" name="email">
+                            <p class="text-[13px] font-normal text-red-500"><?= $err['email'] ?? '';?></p>
+                        </div>
+                        <div class="flex-[1]">
+                            <input class="phone border pl-3 py-3 outline-none w-full focus:border-blue-400" type="text" placeholder="Your phone" name="phone">
+                            <p class="text-[13px] font-normal text-red-500"><?= $err['phone'] ?? '';?></p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <input class="w-full border pl-3 py-3 outline-none w-[48%] focus:border-blue-400" type="text" placeholder="Your address" name="address">
+                        <p class="text-[13px] font-normal text-red-500"><?= $err['address'] ?? '';?></p>
+                    </div>
+                    <div>
+                        <input class="w-full bg-red-500 text-white h-[50px] cursor-pointer uppercase text-[]" type="submit" value="submit">
+                        <p class="text-[13px] font-normal text-red-500"><?= $msg ?? '';?></p>
+                    </div>
                 </form>
             </section>
         </main>

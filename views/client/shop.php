@@ -27,10 +27,9 @@
                 <?php endforeach?>
             </div>
             <div class="flex justify-center gap-3">
-                <a href="./shop?page=1"><input type="submit" value="01" class="px-3 py-1 bg-white text-red-500 border border-red-500 hover:text-white hover:bg-red-500 cursor-pointer"></a>
-                <a href="./shop?page=2"><input type="submit" value="02" class="px-3 py-1 bg-white text-red-500 border border-red-500 hover:text-white hover:bg-red-500 cursor-pointer"></a>
-                <a href="./shop?page=3"><input type="submit" value="03" class="px-3 py-1 bg-white text-red-500 border border-red-500 hover:text-white hover:bg-red-500 cursor-pointer"></a>
-                <a href="./shop?page=4"><input type="submit" value="04" class="px-3 py-1 bg-white text-red-500 border border-red-500 hover:text-white hover:bg-red-500 cursor-pointer"></a>
+                <?php for($i = 1; $i <= $count; $i++):?>
+                    <a href="./shop?page=<?= $i?>"><input type="submit" value="0<?= $i?>" class="px-3 py-1 bg-white text-red-500 border border-red-500 hover:text-white hover:bg-red-500 cursor-pointer"></a>
+                <?php endfor?>
             </div>
         </section>
 <?php require_once __DIR__."/footer.php"?>

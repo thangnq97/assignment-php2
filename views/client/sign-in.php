@@ -1,6 +1,6 @@
 <?php require_once __DIR__."/header.php"?>
 
-<main class="flex mt-[64px] gap-[50px]">
+<main class="flex mt-[64px] gap-[50px] px-4" >
     <div class="flex-[1]">
         <img src="./imgs/blog-01.jpg" alt="">
     </div>

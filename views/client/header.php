@@ -27,6 +27,9 @@
                         <li><a class="text-[18px] font-semibold hover:text-red-500" href="./pages">Pages</a></li>
                         <li><a class="text-[18px] font-semibold hover:text-red-500" href="./shop?page=1">Shop</a></li>
                         <li><a class="text-[18px] font-semibold hover:text-red-500" href="./blog">Blog</a></li>
+                        <?php if(isset($_SESSION['user'])):?>
+                            <li><a class="text-[18px] font-semibold hover:text-red-500" href="./history">History</a></li>
+                        <?php endif?>
                     </ul>
                     <a href="./cart" class="cursor-pointer">
                         <i class="fa-solid fa-cart-shopping"></i>

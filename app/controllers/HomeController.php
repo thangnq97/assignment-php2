@@ -1,6 +1,7 @@
 <?php
     namespace App\Controllers;
 
+use App\Models\BillDetailModel;
 use App\Models\BillModel;
 use App\Models\ColorModel;
 use App\Models\CommentModel;
@@ -29,8 +30,10 @@ use PDO;
             $product = new ProductModel();
             $from = ($page == 1) ? 0 : (($page - 1) * 8);
             $products = $product->take($from, 8)->get();
+            $all_products = ProductModel::all();
+            $count = ceil((count($all_products) / 8));
 
-            return $this->view('client/shop', ['title' => $title, 'products' => $products]);
+            return $this->view('client/shop', ['title' => $title, 'products' => $products, 'count' => $count]);
         }
 
         public function detail(Request $request) {
@@ -55,13 +58,20 @@ use PDO;
             $users = UserModel::all();
             $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 
+            if($product->quantity <= 0) {
+                $check = false;
+            }else {
+                $check = true;
+            }
+
             return $this->view('client/product-detail',['title' => $title,
                                                         'product' => $product,
                                                         'price' => $price, 
                                                         'colors' => $colors,
                                                         'comments' => $comments,
                                                         'users' => $users,
-                                                        'user' => $user
+                                                        'user' => $user,
+                                                        'check' => $check
 
             ]);
         }
@@ -94,7 +104,7 @@ use PDO;
                 }
             }
 
-            if(!$err) {
+            if(!isset($err)) {
                 $user = new UserModel();
                 $user->insert($data);
                 header('location : ./sign-in');
@@ -143,6 +153,7 @@ use PDO;
         public function signOut() {
             unset($_SESSION['user']);
             unset($_SESSION['cart']);
+            unset($_SESSION['toltal_price']);
             
             header('location: ./sign-in');
         }
@@ -168,7 +179,7 @@ use PDO;
         }
 
         public function showCart() {
-            $data = $_SESSION['cart'];
+            $data = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
             $title = 'Cart';
             $products = ProductModel::all();
             $colors = ColorModel::all();
@@ -199,13 +210,38 @@ use PDO;
         }
 
         public function viewConfirm(Request $request) {
+            if(!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+                header('location: ./shop?page=1');
+                die;
+            }
             $title = 'Confirm';
             $voucher = ($request->body()['voucher_id'] == 0) ? null : $request->body()['voucher_id'];
             
             return $this->view('client/confirm', ['title' => $title, 'voucher' => $voucher]);
         }
 
+        public function addBillDetail($id, $arr = []) {
+            $data['bill_id'] = $id;
+
+            $pro_id = $arr['product_id'];
+            $color_id = $arr['color_id'];
+            $item = new ProductColorModel();
+            $pro_color_id = $item->where('product_id', '=', "$pro_id")->andWhere('color_id', '=', "$color_id")->get()[0];
+            $pro_color_id = $pro_color_id->id;
+
+            $data['pro_color_id'] = $pro_color_id;
+            $data['total_price'] = $arr['price'];
+            $data['quantity'] = $arr['quantity'];
+
+            $bill_detail = new BillDetailModel();
+            $bill_detail->insert($data);
+        }
+
         public function confirm(Request $request) {
+            if(!isset($_SESSION['cart'])) {
+                header('location: ./');
+                die;
+            }
             $data = $request->body();
 
             if(!$data['fullname']) {
@@ -222,28 +258,94 @@ use PDO;
             }
 
             if(!isset($err)) {
-                $discount = isset($data['voucher_id']) ? $data['voucher_id'] : null;
+                $voucher_id = $data['voucher_id'];
 
-                if($discount) {
+                if(!empty($voucher_id)) {
                     $voucher = new VoucherModel();
-                    $discount = $voucher->where('id', '=', "$discount")->get()[0];
+                    $discount = $voucher->where('id', '=', "$voucher_id")->get()[0];
+                    $quantity = $discount->quantity - 1;
+                    $voucher->update($voucher_id, ['quantity' => $quantity]);
                     $discount = $discount->discount;
-
                     $_SESSION['total_price'] -= $discount;
-                    $data['total_price'] = $_SESSION['total_price'];
+                } else {
+                    unset($data['voucher_id']);
                 }
+                $data['total_price'] = $_SESSION['total_price'];
 
                 if(isset($_SESSION['user'])) {
                     $data['user_id'] = $_SESSION['user']['id'];
                 }
 
+                
+
                 $bill = new BillModel();
                 $conn = $bill->insert($data);
                 $id = $conn->lastInsertId();
-                echo $id;
+
+                foreach($_SESSION['cart'] as $item) {
+                    $this->addBillDetail($id, $item);
+
+                    $product_id = $item['product_id'];
+                    $item = new ProductModel();
+                    $product = $item->where('id', '=', "$product_id")->get()[0];
+                    $product_quantity = $product->quantity - 1;
+                    $item->update($product_id, ['quantity' => $product_quantity]);
+                }
+
+                unset($_SESSION['cart']);
+                unset($_SESSION['total_price']);
+
+                $msg = 'Đặt hàng thành công';
+                $title = 'Confirm';
+            
+                return $this->view('client/confirm', ['title' => $title, 'msg' => $msg]);
             }
 
+            $title = 'Confirm';
+            $voucher = ($request->body()['voucher_id'] == 0) ? null : $request->body()['voucher_id'];
+            
+            return $this->view('client/confirm', ['title' => $title, 'voucher' => $voucher, 'err' => $err]);
+        }
 
+        public function addComment(Request $request) {
+            $data = $request->body();
+            $data['user_id'] = $_SESSION['user']['id'];
+
+            $comment = new CommentModel();
+            $comment->insert($data);
+            header('location: ./product-detail?id='.$data['product_id']);
+            die;
+        }
+
+        public function history() {
+            $vouchers = VoucherModel::all();
+            $title = 'History';
+            $id = $_SESSION['user']['id'];
+
+            $bill = new BillModel();
+            $bills = $bill->where('user_id', '=', "$id")->get();
+
+            return $this->view('client/history', ['title' => $title, 'bills' => $bills, 'vouchers' => $vouchers]);
+        }
+
+        public function historyDetail(Request $request) {
+            $id = $request->body()['id'];
+            $title = 'Chi tiết bill';
+            $item = new BillDetailModel();
+            $bill_detail = $item->where('bill_id', '=', "$id")->get();
+            $data = [];
+            foreach($bill_detail as $item) {
+                $pro_color_id = $item->pro_color_id;
+                $pro_color = ProductColorModel::find($pro_color_id);
+                $product = ProductModel::find($pro_color->product_id)->name;
+                $color = ColorModel::find($pro_color->color_id)->name;
+                $detail_id = $item->id;
+                $quantity = $item->quantity;
+                $total_price = $item->total_price;
+                array_push($data, ['product' => $product, 'color' => $color, 'id' => $detail_id, 'quantity' => $quantity, 'total_price' => $total_price]);
+            }
+
+            return $this->view('client/history-detail', ['title' => $title, 'data' => $data]);
         }
     }
 ?>
